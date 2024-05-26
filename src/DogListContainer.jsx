@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react'
+import {BreedsSelect} from './BreedsSelect'
 
 export const DogListContainer = () => {
   const [breeds, setBreeds] = useState([])
+  const [selectBreed, setSelectBreed] = useState('')
   const breeds_list_url = 'https://dog.ceo/api/breeds/list/all'
 
   useEffect(() => {
@@ -18,7 +20,20 @@ export const DogListContainer = () => {
         console.error('Error fetching data:', error)
       })
   },[])
-  return <></>
+
+const handleSelectChange = (selectedBreed) => {
+  selectBreed(selectBreed)
+}
+
+  return(
+    <div>
+      <BreedsSelect
+        breeds = {breeds}
+        selectBreed = {selectBreed}
+        setSelectBreed = {handleSelectChange}
+        />
+    </div>
+  )
 }
 
 export default DogListContainer
