@@ -1,26 +1,37 @@
-import React, { useState, useEffect } from 'react';
-import { DogImage } from "./DogImage"
+import React, { useState } from 'react'
+import DogImage from './DogImage'
 
 export const Description = () => {
-  const [dogUrl, setDogUrl] = useState("https://images.dog.ceo/breeds/spaniel-brittany/n02101388_6057.jpg");
-  async function APIurl(){
+  const [dogUrl, setDogUrl] = useState(
+    'https://images.dog.ceo/breeds/stbernard/n02109525_10908.jpg',
+  )
+
+  const change = async () => {
     try {
-      const response = await fetch("https://dog.ceo/api/breeds/image/random");
-      if (!response.ok) {
-        throw new Error('Failed to fetch dog image');
+      const data = await fetch('https://dog.ceo/api/breeds/image/random')
+      if (!data.ok) {
+        throw new Error('Network response was not ok')
       }
-      const data = await response.json();
-      setDogUrl(data.message);
+      const img = await data.json()
+      return img.message
     } catch (error) {
-      console.error('Error fetching dog image:', error);
+      console.error('There was a problem with the fetch operation:', error)
+      return dogUrl
     }
   }
 
-  return(
+  const ChangeClick = async () => {
+    const imageUrl = await change()
+    setDogUrl(imageUrl)
+  }
+
+  return (
     <>
-    <p>犬の画像を表示するサイトです</p>
-    <DogImage url = {dogUrl} />
-    <button onClick={APIurl}>更新</button>
+      <div className="allthing">
+        <p>犬の画像を表示するサイト！</p>
+        <button onClick={ChangeClick}>更新</button>
+        <DogImage url={dogUrl} />
+      </div>
     </>
   )
 }

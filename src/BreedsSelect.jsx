@@ -1,20 +1,16 @@
-import React  from "react";
-//import { breeds } from "tests/mock/fetch"
+import React from 'react'
 
-export const BreedsSelect = ({breeds, selectBreed, setSelectedBreed}) => {
-  const handleChange = (event) => {
-    setSelectedBreed(event.target.value);
-    console.log(event.target.value);
-  };
-  return(
-    <select value = {selectBreed} onChange = {handleChange}>
-      {breeds.map((breed) => (
-        <option key = {breed} value = {breed}>
+// @ts-check
+export const BreedsSelect = ({ breeds, selectedBreed, onChange }) => {
+  return (
+    <select value={selectedBreed} onChange={onChange}>
+      {Object.keys(breeds).map(breed => (
+        <option value={breed} key={breed}>
           {breed}
         </option>
       ))}
     </select>
-  );
-};
+  )
+}
 
-//export default BreedsSelect
+export default BreedsSelect

@@ -1,11 +1,9 @@
-
-export const DogImage = (props) => {
-  console.log(props.url)
-  return(
-    <div>
-      <img src = {props.imageUrl} alt="いっぬ"/>
-    </div>
+export const DogImage = props => {
+  return (
+    <p>
+      <img src={props.url} alt="サイトから持ってきた犬の画像" />
+    </p>
   )
 }
 
-//export default DogImage
+export default DogImage
